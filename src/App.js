@@ -1,6 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import Character from './components/Character';
+
+const StyledMainContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  padding: 5px 8%;
+  justify-content: space-around;
+  align-content: center;
+`
+const StyledContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: papayawhip;
+  padding: 3%
+  width: 35%
+  border-radius: 20px;
+`
 
 const App = () => {
   // Try to think through what state you'll need for this app before starting. Then build out
@@ -37,9 +55,23 @@ const App = () => {
   }, [])
 
   return (
+    <>
     <div className="App">
       <h1 className="Header">Characters</h1>
     </div>
+    <StyledMainContainer className='main-container'>
+      <StyledContainer className='character-container'>
+        {
+          characters.map((char) => {
+            return <Character key={char.key} action={loadedDetails} props={char}/>
+          })
+        }
+      </StyledContainer>
+      <StyledContainer className='details'>
+        
+      </StyledContainer>
+    </StyledMainContainer>
+    </>
   );
 }
 
