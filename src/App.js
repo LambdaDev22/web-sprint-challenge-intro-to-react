@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import Character from './components/Character';
+import Details from './components/Details';
 
 const StyledMainContainer = styled.div`
   display: flex;
   flex-direction: row;
   width: 80%;
-  padding: 5px 8%;
+  padding: 0 8%;
   justify-content: space-around;
   align-content: center;
 `
@@ -15,8 +16,8 @@ const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
   background-color: papayawhip;
-  padding: 3%
-  width: 35%
+  padding: 5%
+  width: 30%
   border-radius: 20px;
 `
 
@@ -41,7 +42,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    axios.get(`https://swapi.dev/api/films/`)
+    axios.get(`https://swapi.dev/api/people/`)
       .then(res => {
         const data = res.data;
         data.forEach((element, index) => {
@@ -68,7 +69,10 @@ const App = () => {
         }
       </StyledContainer>
       <StyledContainer className='details'>
-        
+        { activeCharacter
+          ? <Details action={closedDetails} props={characters[activeCharacter - 1]}/>
+          : <h2>Click on any character to see their details</h2>
+        }
       </StyledContainer>
     </StyledMainContainer>
     </>
